@@ -3,6 +3,8 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "server:dev": "turbo run dev --filter=server",
+    "client:dev": "turbo run dev --filter=client",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
