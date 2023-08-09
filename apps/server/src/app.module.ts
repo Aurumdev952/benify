@@ -7,11 +7,14 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       entities: [],
       synchronize: true,
-      connectString: process.env.DATABASE_URL,
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
     }),
     AuthModule,
     MediaModule,
