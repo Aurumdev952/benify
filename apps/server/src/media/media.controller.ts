@@ -18,6 +18,7 @@ import { CreateMediaDto } from './dto/create-media.dto';
 import { UpdateMediaDto } from './dto/update-media.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import type { Response } from 'express';
+
 @Controller('media')
 export class MediaController {
   constructor(private readonly mediaService: MediaService) {}
