@@ -82,6 +82,19 @@ export class MediaService {
       console.log(e);
     }
   }
+  s3_getobject(bucket: string, key: string) {
+    const params = {
+      Bucket: bucket,
+      Key: key,
+      // ContentDisposition: 'inline',
+    };
+
+    try {
+      return this.s3.getObject(params).createReadStream();
+    } catch (e) {
+      console.log(e);
+    }
+  }
   async findAll() {
     return await this.mediaRepository.find();
   }
@@ -122,5 +135,18 @@ export class MediaService {
     } else {
       throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
     }
+  }
+
+  async stream(id: string) {
+    const media = await this.mediaRepository.findOne({
+      where: {
+        id,
+      },
+      select: {
+        key: true,
+      },
+    });
+    if (!media) throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    return this.s3_getobject(this.AWS_S3_BUCKET, media.key);
   }
 }
