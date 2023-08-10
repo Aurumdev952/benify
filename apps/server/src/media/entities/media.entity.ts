@@ -4,21 +4,21 @@ export class Media {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ default: 'audio' })
   type: 'audio' | 'video';
 
-  @Column()
+  @Column({ nullable: false })
   title: string;
 
-  @Column()
+  @Column({ nullable: false })
   size: number;
-
-  @Column()
-  length: number;
 
   @Column()
   file_url: string;
 
-  @Column()
+  @Column({ nullable: false })
+  key: string;
+
+  @Column({ nullable: false })
   author: string;
 }
